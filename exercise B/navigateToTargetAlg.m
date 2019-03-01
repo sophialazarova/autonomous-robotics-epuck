@@ -1,4 +1,4 @@
-function x = kinematics(h,p1,p2,startAngle)
+function x = navigateToTargetAlg(h,p1,p2,startAngle)
 c = getDistance(p1,p2);
 angle = getAngle(p1, p2, startAngle);
 impulses = getImpulsesRotation(angle);

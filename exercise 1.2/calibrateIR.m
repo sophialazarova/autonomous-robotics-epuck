@@ -3,8 +3,8 @@ testResults = runTest(h,n);
 meanValues = getMean(testResults,n);
 stdValues = getStd(testResults,n);
 
-meanSensor1=meanValues(i)
-stdSensor1=stdValues(i)
+meanSensor1=meanValues(i);
+stdSensor1=stdValues(i);
 offsetVector=[meanSensor1; stdSensor1];
 end
 
