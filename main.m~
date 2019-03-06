@@ -2,7 +2,7 @@
 % Invoke all exercise functions here. 
 % In order to test an exercise uncomment the section corresponding to it.
 
-%% INITITAL PARAMETERS - START LOCATION, TARGET LOCATION, INITIAL ORIENTATION.
+%% INITITAL PARAMETERS - START LOCATION AND TARGET LOCATION.
 h = kOpenPort();
 kSetEncoders(h,0,0)
 
@@ -22,8 +22,7 @@ angle_rad = deg2rad(0);
 %% SENSOR CALIBRATION SETTING %%
 %% Obtains mean sensor reading across 100 trials for each distance.
 %% Requires manually movement of test object to different distances from the robot
-%% In order to use put a breakpoint on line 35. Each time the breakpoint is hit move the
-%% obstacle 2cm closer to the robot. Range 10cm-0cm, in total 6 cases.
+%% In order to use put a breakpoint on line 35. Each time the breakpoint is hit move the obstacle 2cm closer to the 
 %% Plots the result from the calibration trial for the current sensor
 % mean_std_values=0.0;
 % mean_std_values(6,2) = 0.0;
@@ -57,6 +56,6 @@ angle_rad = deg2rad(0);
 %navigateToTargetDyn(h,p1,p2,rad);
 
 %% EXERCISE 2.2 %%
-%avoidObstacleDyn(h,p1,p2,rad);
+avoidObstacleDyn(h,p1,p2,rad);
 
 

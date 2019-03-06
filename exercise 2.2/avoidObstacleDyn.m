@@ -1,4 +1,14 @@
 function avoidObstacleDyn( h, start_loc, target_loc, start_angle)
+% AVOIDOBSTACLEDYN Navigates the robot from starting location A to
+% target location B while avoiding any obstacles on the way. Uses dynamical
+% approach. Takes into account the starting angle.
+% 
+% AVOIDOBSTACLEDYN(h, start_loc, target_loc, start_angle)
+% @PARAM
+% h - connection token.
+% start_loc - starting location given as a vector in the format (x,y).
+% target_loc - target location given as a vector in the format (x,y).
+% start_angle - starting angle(orientation) given in radians [0,2Pi]
 
 ROBOT_PROXIMITY_SENSORS_DIRECTIONS=[deg2rad(-15), deg2rad(-45), deg2rad(-90), deg2rad(-150), deg2rad(150), deg2rad(90), deg2rad(45), deg2rad(15)];
 SPEED_CONST = 200;
@@ -78,7 +88,6 @@ function delta_phi_repellors = getRepellorsContribution(dist_obs, psi_obs, curre
     BETA_1=8.8;
     BETA_2=6.3;
     delta_theta = degtorad(60); %%% ?
-    DISTANCE_BTW_WHEELS = 53.0;
 
     %% calculate strength of repulsion
     lambda_obs = zeros(1,8);

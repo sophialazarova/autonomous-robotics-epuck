@@ -1,0 +1,34 @@
+function stopBeforeObstacle(h, distance)
+% STOPBEFOREOBSTACLE Stops the moving robot in a specified distance to an obstacle ahead. 
+% 
+% STOPBEFOREOBSTACLE(h, distance)
+% @PARAM
+% h - connection token
+% distance - specifies in what distance before an obstacle the robot
+% should stop. Given in centimeters.
+
+current_sensors_values = [0;0;0;0;0;0;0;0];
+calibration_values = [3500,5;3900,5;3700,5;3900,5;3900,5;4000,5;4000,5;4000,5];
+c=bar(current_sensors_values);
+    while(1)
+    proximity_sensors_readings = kProximity(h);
+      for i=1:1:8
+          calibration_=calibration_values(i,:);
+          convertedValue=convertCm(normalizeInRange(proximity_sensors_readings(i),mn));
+          current_sensors_values(i)=convertedValue;
+      end
+      delete(c)
+      c=bar(current_sensors_values);
+      xlabel('Sensor');
+      ylabel('Distance to object (cm)');
+      pause(0.02)
+      drawnow limitrate
+    normalizedValue=normalizeInRange((proximity_sensors_readings(1)+proximity_sensors_readings(2))/2,calibration_values(8,:));
+    convertedValue = convertCm(normalizedValue);
+        if(convertedValue<distance+0.3)
+            kStop(h);
+            break;
+        end
+    end
+end
+

@@ -4,11 +4,9 @@ function trackLocationOdometry(h,initial_position,initial_orientation_degrees)
 % current location. Uses the readings from the wheel sensors to estimate
 % the current location and orientation of the robot based on a given initial position and orientation.
 % 
-% TRACKLOCATIONODOMETRY(h,initial_position,initial_orientation_degrees)
-% @PARAM
-% h - connection token.
-% initial_position - starting location given as a vector in the format (x,y).
-% orientation_degrees - initial orientation in degrees
+% TRACKLOCATIONODOMETRY(h,initial_position,initial_orientation_degrees) Initiates the random movement sequence
+% on a robot with connection token h, given initial loaction and initial
+% orientation.
 
 %%%%%FIXED PROGRAM%%%%%
 %DO NOT CHANGE OR USE ANY VARIABLES HERE
@@ -27,9 +25,9 @@ last_measured_pulses = [0;0];
 current_angle = deg2rad(initial_orientation_degrees);
 last_plot_location = initial_position;
 
-current_location_marker = rectangle('Position',[last_plot_location(1),last_plot_location(2),20,20]);
-current_location_marker.EdgeColor = 'none';
-current_location_marker.FaceColor = 'blue';
+pointer = rectangle('Position',[last_plot_location(1),last_plot_location(2),20,20]);
+pointer.EdgeColor = 'none';
+pointer.FaceColor = 'blue';
 axis equal
 
 ylim([0 400])
@@ -49,16 +47,16 @@ ylim([0 400])
         if (distance_pulses(1)==distance_pulses(2))
             %% case: moving straight
             %% plot path
-            path_marker = rectangle('Position',[last_plot_location(1),last_plot_location(2),5,5]);
-            path_marker.FaceColor = 'red';
-            path_marker.EdgeColor = 'none';
+            trace = rectangle('Position',[last_plot_location(1),last_plot_location(2),5,5]);
+            trace.FaceColor = 'red';
+            trace.EdgeColor = 'none';
 
             %% calculate current position
             location_displacement = [distancemm(1)*cos(current_angle), distancemm(1)*(sin(current_angle))];
             current_location = [last_plot_location(1)+location_displacement(1), last_plot_location(2)+location_displacement(2)];
 
             %% plot marker at current location
-            current_location_marker.Position = [current_location(1), current_location(2),15,20];
+            pointer.Position = [current_location(1), current_location(2),15,20];
 
             %% update values
             last_measured_pulses = current_path_pulses;
@@ -76,9 +74,9 @@ ylim([0 400])
         else
             %% case: arc movement
             %% print path %%
-            path_marker = rectangle('Position',[last_plot_location(1),last_plot_location(2),5,5]);
-            path_marker.FaceColor = 'red';
-            path_marker.EdgeColor = 'none';
+            trace = rectangle('Position',[last_plot_location(1),last_plot_location(2),5,5]);
+            trace.FaceColor = 'red';
+            trace.EdgeColor = 'none';
 
             %% calculate current position %%
             angle_displacement=((distancemm(2)-distancemm(1))/53.0);
@@ -90,7 +88,7 @@ ylim([0 400])
             current_location = [last_plot_location(1)+xallo, last_plot_location(2)+yallo];
 
             %% draw marker at current location
-            current_location_marker.Position = [current_location(1), current_location(2),15,20];
+            pointer.Position = [current_location(1), current_location(2),15,20];
 
             %% update values
             last_measured_pulses = current_path_pulses;

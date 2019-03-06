@@ -1,15 +1,14 @@
 function navigateToTargetDyn( h, start_loc, target_loc, start_angle)
-% NAVIGATETOTARGETDYN Navigates the robot from starting location A to
-% target location B. Uses dynamical
-% approach. Takes into account the starting angle.
+% NAVIGATETOTARGETDYN NAvigates the robot from starting location A to
+% target location B 
+% obtained from the dynamical contributions.
 % 
-% NAVIGATETOTARGETDYN(h, start_loc, target_loc, start_angle)
+% right_left_velocity = GETVELOCITIES(delta_phi)
 % @PARAM
-% h - connection token.
-% start_loc - starting location given as a vector in the format (x,y).
-% target_loc - target location given as a vector in the format (x,y).
-% start_angle - starting angle(orientation) given in radians [0,Pi]
-
+% delta_phi - angular displacement resulting from the dynamics.
+% @RETURN
+% right_left_velocity - vector containing the calculated velocities of the right and left
+% wheels respectively on first and second position.
 SPEED_CONST = 200;
 notat_tar=true;
 last_pos_pul = kGetEncoders(h);

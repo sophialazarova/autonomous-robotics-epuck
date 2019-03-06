@@ -1,17 +1,14 @@
-function navigateToTargetAlg(h,p1,p2,initial_orientation)
+function navigateToTargetAlg(h,p1,p2,start_angle)
 % NAVIGATETOTARGETALG Navigates robot from any given location A to any
 % given target location B in the corresponding environment. Uses algorithmic
-% solution, calculates path on a straight line. Takes into account the
+% solution, calculates path on straight line. Takes into account the
 % initial facing angle(allocentric) of the robot.
 %
-% NAVIGATETOTARGETALG(h,p1,p2,initial_orientation)
-% @PARAM
-% h - connection token.
-% p1 - starting location given as a vector in the format (x,y).
-% p2 - target location given as a vector in the format (x,y).
-% initial_orientation - starting angle(orientation) given in radians [0,2Pi]
+% NAVIGATETOTARGETALG(h,p1,p2,start_angle) Initiates the navigation sequence
+% on a robot with connection token h from start location p1 to target
+% locaiton p2 with a start angle.
 c = getDistance(p1,p2);
-angle = getAngle(p1, p2, initial_orientation);
+angle = getAngle(p1, p2, start_angle);
 impulses = getImpulsesRotation(angle);
 arc_length = getArcLength(angle, 26.5);
 if(arc_length ~= 0) 
@@ -23,18 +20,17 @@ impulses_forward = getImpulsesForward(c);
 moveForward(h, impulses_forward, speed);
 end
 
-%% Private utility functions
 function c = getDistance(p1,p2)
 a = abs(p1(1)-p2(1)); % a side of the triangle
 b = abs(p1(2)-p2(2)); % b side of the triangle
 c = sqrt(power(a,2) + power(b,2));
 end
 
-function res = getAngle(p1,p2, start_angle)
+function res = getAngle(p1,p2, startAngle)
 a = p2(1)-p1(1); % a side of the triangle
 b = p2(2)-p1(2); % b side of the triangle
-angle_temp = atan2(b,a); % angle between current position and target center
-res=angle_temp-start_angle; 
+angleTemp = atan2(b,a); % angle between current position and target center
+res=angleTemp-startAngle; 
 end
 
 function res = getImpulsesRotation(angle)

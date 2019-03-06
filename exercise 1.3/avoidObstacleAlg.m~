@@ -47,7 +47,10 @@ function avoidObstacleAlg(h,p1,p2,start_angle)
                 end 
 
                 %% plot %%
-                updatePlot(last_plot_location(1),last_plot_location(2));
+                plot(last_plot_location(1),last_plot_location(2),'o');
+                drawnow
+                xlim([0,270]);
+                ylim([0,400]);
                 xlabel('x (mm)');
                 ylabel('y (mm)');
 
@@ -84,7 +87,10 @@ function avoidObstacleAlg(h,p1,p2,start_angle)
             pulses_after_rotation = last_pulses_readings;
             while(1)
                 %% plot %%
-                updatePlot(last_plot_location(1),last_plot_location(2));
+                plot(last_plot_location(1),last_plot_location(2),'o');
+                drawnow
+                xlim([0,270]);
+                ylim([0,400]);
                 
                 kSetSpeed(h,200,200);
                 current_location_stats = updateMovementStatsStraight(h,last_plot_location, last_pulses_readings,current_angle);
@@ -104,13 +110,15 @@ function avoidObstacleAlg(h,p1,p2,start_angle)
             %% obstacle passed -> reorient towards target 
             angle_threshold=current_angle+angle_to_target;
             while(~(current_angle > angle_threshold-deg2rad(2) && current_angle<angle_threshold+deg2rad(2)))
-                %rotation loop
+                %% rotation loop
                 kSetSpeed(h,-100,100);
                 
                 %% plot %%
-                updatePlot(last_plot_location(1),last_plot_location(2));
+                plot(last_plot_location(1),last_plot_location(2),'o');
+                drawnow
+                xlim([0,270]);
+                ylim([0,400]);
                 
-                %% calculate angular displacement
                 current_pulses_readings = kGetEncoders(h);
                 distance_pulses=current_pulses_readings-last_pulses_readings;
                 distancemm = computeDistancemm(distance_pulses);

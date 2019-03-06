@@ -1,11 +1,6 @@
 function basic_mov(h)
-% BASIC_MOV Navigates robot from location A to location B using a hardcoded
-% path. Exercise A, coresponds to the first environment.
-%
-% BASIC_MOV(h)
-% @PARAM
-% h - connection token.
-
+% BASIC_MOV Navigates robot from location A to location B via a hardcoded path.
+% BASIC_MOV(h)  
 turn = 0;
 leftTurnSpeed = -70;
 rightTurnSpeed = 70;
