@@ -4,7 +4,7 @@ Autonomous Robotics Lab Exercises
 Tasks solved during the Autonomous Robotics Lab class at the Ruhr University
 Exercises are implemented for e-puck robots.
 
-For more information on the implementation check the reports folder.
+For formal details on the implementation(mathematical) check the reports folder.
 
 EXERCISES
 -----------------------------------------
